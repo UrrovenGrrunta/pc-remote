@@ -78,7 +78,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 with open(image_path, "rb") as file:
                     self.wfile.write(file.read())
-            case "launch/gr7":
+            case "/launch/gr7":
                 launch_gr7()
                 self.send_response(200)
                 self.end_headers()
