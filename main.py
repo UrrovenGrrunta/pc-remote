@@ -22,13 +22,16 @@ APPS = {
     "vcd_santas_rampage": 265210,
 }
 
+
 def launch_osu():
     os.startfile(r"C:\Users\timbr\Desktop\OTD\OpenTabletDriver.UX.Wpf.exe")
     os.startfile(r"D:\OSUSTBL\osu!.exe")
 
+
 def launch_app(app_name: str):
     app_id = APPS[app_name]
     os.startfile(f"steam://rungameid/{app_id}")
+
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -40,6 +43,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 with open("static/index.html", "r", encoding="utf-8") as file:
                     html = file.read()
                     self.wfile.write(html.encode("utf-8"))
+
             case "/script.js":
                 self.send_response(200)
                 self.send_header("Content-type", "text/javascript")
@@ -47,37 +51,52 @@ class RequestHandler(BaseHTTPRequestHandler):
                 with open("static/script.js", "r", encoding="utf-8") as file:
                     js = file.read()
                     self.wfile.write(js.encode("utf-8"))
+
             case "/style.css":
                 self.send_response(200)
                 self.send_header("Content-type", "text/css")
                 self.end_headers()
-                
                 with open("static/style.css", "r", encoding="utf-8") as file:
                     css = file.read()
                     self.wfile.write(css.encode("utf-8"))
-            case "/images/header.jpg":
+
+            case path if path.startswith("/images/"):
+                image_name = path.removeprefix("/images/")
+                image_path = os.path.join("static", "images", image_name)
+
+                if not os.path.isfile(image_path):
+                    self.send_response(404)
+                    self.end_headers()
+                    return
+
                 self.send_response(200)
                 self.send_header("Content-type", "image/jpeg")
                 self.end_headers()
-                
-                with open("static/images/header.jpg", "rb") as file:
+                with open(image_path, "rb") as file:
                     self.wfile.write(file.read())
+
             case "/launch/osu":
                 launch_osu()
                 self.send_response(200)
                 self.end_headers()
-                
-                with open("static/images/osu.jpg", "rb") as file:
-                    self.wfile.write(file.read())
+
             case path if path.startswith("/launch/"):
                 app_name = path.removeprefix("/launch/")
                 launch_app(app_name)
-            
+                self.send_response(200)
+                self.end_headers()
+
+            case _:
+                self.send_response(404)
+                self.end_headers()
+
+
 def main():
     host: str = "100.85.81.84"
     port: int = 8000
     server = HTTPServer((host, port), RequestHandler)
     server.serve_forever()
-    
+
+
 if __name__ == "__main__":
     main()
