@@ -28,6 +28,10 @@ def launch_osu():
     os.startfile(r"D:\OSUSTBL\osu!.exe")
 
 
+def launch_gr7():
+    os.startfile(r"C:\Native Instruments\Guitar Rig 7/Guitar Rig 7.exe")
+
+
 def launch_app(app_name: str):
     app_id = APPS[app_name]
     os.startfile(f"steam://rungameid/{app_id}")
@@ -74,7 +78,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 with open(image_path, "rb") as file:
                     self.wfile.write(file.read())
-
+            case "launch/gr7":
+                launch_gr7()
+                self.send_response(200)
+                self.end_headers()
+                
             case "/launch/osu":
                 launch_osu()
                 self.send_response(200)
@@ -92,6 +100,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 
 def main():
+    print("Up and running")
     host: str = "100.85.81.84"
     port: int = 8000
     server = HTTPServer((host, port), RequestHandler)
