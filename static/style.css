@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: #0d0f12;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    color: #f2f2f2;
+    background:
+        radial-gradient(circle at top, #20252d 0, #12151a 35%, #0d0f12 70%);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+.remote {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    padding: 32px 16px 60px;
+}
+
+.remote__header {
+    margin-bottom: 24px;
+}
+
+.remote__eyebrow {
+    margin: 0 0 4px;
+
+    color: #8d949e;
+
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.remote__header h1 {
+    margin: 0;
+
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.game-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 0;
+    overflow: hidden;
+
+    color: #fff;
+    background: #191d23;
+
+    border: 1px solid #292e36;
+    border-radius: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 120ms ease,
+        background 120ms ease,
+        border-color 120ms ease;
+}
+
+.game-card img {
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 460 / 215;
+
+    background: #111;
+    object-fit: cover;
+
+    pointer-events: none;
+}
+
+.game-card span {
+    display: flex;
+    align-items: center;
+
+    min-height: 54px;
+    padding: 10px 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.25;
+
+    pointer-events: none;
+}
+
+.game-card:active {
+    transform: scale(0.97);
+
+    background: #242a32;
+    border-color: #4c5664;
+}
+
+@media (hover: hover) {
+    .game-card:hover {
+        transform: translateY(-2px);
+
+        background: #20252c;
+        border-color: #3b424d;
+    }
+}
+
+@media (min-width: 700px) {
+    .remote {
+        padding-inline: 24px;
+    }
+
+    .game-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .game-card span {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .game-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
