@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -22,6 +23,8 @@ APPS = {
     "vcd_santas_rampage": 265210,
 }
 
+def launch_ubuntu():
+    subprocess.run(["shutdown", "/r", "/t", "0"], cwd=None, check=True)
 
 def launch_osu():
     os.startfile(r"C:\Users\timbr\Desktop\OTD\OpenTabletDriver.UX.Wpf.exe")
@@ -85,6 +88,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                 
             case "/launch/osu":
                 launch_osu()
+                self.send_response(200)
+                self.end_headers()
+            
+            case "/launch/ubuntu":
+                launch_ubuntu()
                 self.send_response(200)
                 self.end_headers()
 
