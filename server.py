@@ -1,28 +1,9 @@
 import os
+import json
+import steam
 import launchers
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
-
-APPS = {
-    "cs2": 730,
-    "gd": 322170,
-    "TBOI": 250900,
-    "ets_2": 227300,
-    "phasmo": 739630,
-    "ADOFAI": 977950,
-    "vcd": 246900,
-    "cloverpit": 3314790,
-    "starrupture": 1631270,
-    "satisfactory": 526870,
-    "creepy_support": 3685900,
-    "passport_blyat": 239030,
-    "graveyard_keeper": 599140,
-    "everlasting_summer": 331470,
-    "vcd_shadow_warrior": 255520,
-    "deep_rock_galactic": 548430,
-    "vcd_santas_rampage": 265210,
-}
 
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -105,10 +86,19 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.send_response(200)
                 self.end_headers()
 
+            case "/apps":
+                apps = steam.get_apps(steam.get_installed_apps())
+
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+
+                self.wfile.write(json.dumps(apps).encode("utf-8"))
+
             case path if path.startswith("/launch/"):
-                app_name = path.removeprefix("/launch/")
-                app_id = APPS[app_name]
+                app_id = int(path.removeprefix("/launch/"))
                 launchers.launch_app(app_id)
+
                 self.send_response(200)
                 self.end_headers()
 
