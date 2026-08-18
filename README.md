@@ -8,12 +8,13 @@ PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-
 
 - Mobile-friendly game library interface
 - Remote access through Tailscale
+- Dynamic Steam game discovery from local `appmanifest_*.acf` files
+- Steam metadata and artwork loaded from the Steam Store API
 - Launch Steam games using their Steam AppID
-- Read installed Steam AppIDs from `libraryfolders.vdf`
 - Launch non-Steam applications from local executable paths
 - Custom launch actions for osu! + OpenTabletDriver and Guitar Rig 7
 - Restart into the Ubuntu machine workflow from the web interface
-- Steam artwork for game cards with support for locally hosted images
+- Experimental Hydra library investigation
 - No web framework required
 
 ## Tech stack
@@ -23,6 +24,7 @@ PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-
 - HTML
 - CSS
 - JavaScript
+- Node.js for experimental Hydra/LevelDB tooling
 - Tailscale
 
 ## Project structure
@@ -30,28 +32,48 @@ PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-
 ```text
 pc-remote/
 ├── main.py
-├── server.py
-├── launchers.py
-├── steam.py
+├── core/
+│   ├── config.py
+│   ├── launchers.py
+│   └── server.py
+├── providers/
+│   ├── steam.py
+│   ├── hydra.py
+│   └── hydra_reader.js
+├── documents/
+│   ├── UGPEP.md
+│   └── UGPEP_RU.md
 ├── static/
 │   ├── index.html
 │   ├── style.css
 │   ├── script.js
 │   └── images/
+├── package.json
+├── package-lock.json
 ├── .gitignore
 └── README.md
 ```
 
-### Python modules
+## Modules
 
-- `main.py` — application entry point; creates and starts the HTTP server.
-- `server.py` — HTTP routes, static file serving, and request handling.
-- `launchers.py` — launches Steam games and local Windows applications.
-- `steam.py` — reads the local Steam library and discovers installed AppIDs.
+- `main.py` — application entry point.
+- `core/server.py` — HTTP routes, static file serving, and request handling.
+- `core/launchers.py` — launches Steam games and local Windows applications.
+- `core/config.py` — reserved for project configuration work.
+- `providers/steam.py` — discovers installed Steam AppIDs from manifest filenames and retrieves game metadata from the Steam Store API.
+- `providers/hydra.py` — experimental Hydra database/SSTable investigation.
+- `providers/hydra_reader.js` — experimental Node.js LevelDB reader used during Hydra research.
+
+## Documentation
+
+The repository contains the semi-official **UGPEP — UrrovenGrrunta Python Enhancement Proposal**, a project-level Python style guide built on top of PEP 8 with additional conventions for readability, import layout, experimental code, development history, bilingual graveyard records, and Paranormal-Driven Development.
+
+- `documents/UGPEP.md` — English version.
+- `documents/UGPEP_RU.md` — Russian version.
 
 ## How it works
 
-The phone opens the PC Remote page through the Windows machine's Tailscale address. Button presses send requests to the Python HTTP server, which dispatches launch actions through `launchers.py`.
+The phone opens the PC Remote page through the Windows machine's Tailscale address. The frontend requests the current Steam application list from the Python HTTP server and dynamically builds game cards from the returned metadata.
 
 Steam games are launched through Steam URIs:
 
@@ -59,15 +81,21 @@ Steam games are launched through Steam URIs:
 steam://rungameid/<APP_ID>
 ```
 
-Non-Steam applications are launched directly with `os.startfile()`.
+Non-Steam applications can be launched directly with `os.startfile()`.
 
-The Steam module currently reads:
+Installed Steam applications are discovered from files matching:
 
 ```text
-D:/Steam/steamapps/libraryfolders.vdf
+appmanifest_*.acf
 ```
 
-and extracts the AppIDs listed in its `apps` section. The next step is to use those IDs to build the Steam game list automatically instead of maintaining it manually.
+inside the configured Steam `steamapps` directory. The AppID is extracted from each manifest filename, while the Steam Store API supplies display names and artwork.
+
+## Hydra support
+
+Hydra support is currently experimental. The investigation has progressed into direct parsing of LevelDB SSTable data after the local Hydra database was found to contain corrupted blocks that could not be read reliably through the normal LevelDB API.
+
+This code is research-stage and should not yet be treated as production functionality.
 
 ## Running
 
@@ -87,4 +115,4 @@ This project is intended for use inside a private Tailscale network. It should n
 
 ## Status
 
-Work in progress. The project has been split into separate server, launcher, and Steam modules. Installed Steam AppIDs can now be discovered from `libraryfolders.vdf`; automatic game metadata and card generation are still in development.
+Work in progress. Steam discovery, metadata loading, dynamic web cards, and AppID-based launching are functional. Hydra integration is under active investigation.
