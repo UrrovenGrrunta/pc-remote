@@ -1,0 +1,61 @@
+#               R.I.P
+#     9_headed_monster_aka_hydra.py
+# 17/08/2026 (23:50) - 17/08/2026 (23:55)
+# Cause of death: Project structure.
+#                 100500 .py files in root were deemed a war crime.
+
+
+#               R.I.P
+#       Local Python LevelDB
+# 18/08/2026 (00:00) - 18/08/2026 (01:04)
+# Cause of death: Could only see 4 keys.
+# Last words: b'screenState'
+
+
+#               R.I.P
+#          classic-level@3
+# 18/08/2026 (01:04) - 18/08/2026 (01:15)
+# Cause of death: LEVEL_CORRUPTION: bad block type.
+# Last words: steam:1055430
+
+
+#               R.I.P
+#          classic-level@2
+# 18/08/2026 (01:15) - 18/08/2026 (01:38)
+# Cause of death: LEVEL_CORRUPTION: bad block type.
+#                 Downgrading changed absolutely fuck all.
+# Last words: steam:1055430
+
+
+#               R.I.P
+#             leveldb
+# 18/08/2026 (01:00) - 18/08/2026 (02:00)
+# Cause of death: Failed to read the corrupted Hydra database
+#                 and failed to resurrect it with repair_db().
+
+
+#               R.I.P
+#      hydra-db-repair-test
+# 18/08/2026 (01:45) - 18/08/2026 (01:50)
+# Cause of death: Experimental surgery unsuccessful.
+#                 Patient survived repair_db(), but remained
+#                 terminally LEVEL_CORRUPTION.
+
+
+#               R.I.P
+#       Normal LevelDB API
+# 18/08/2026 (00:00) - 18/08/2026 (02:00)
+# Cause of death: Every reasonable method of accessing the
+#                 database eventually encountered:
+#                 Corruption: bad block type.
+
+
+#               R.I.P
+#          Моя менталка (My sainity)
+# ????/??/?? (??:??) - 18/08/2026 (01:55)
+# Cause of death: Attempted to add Hydra support to a
+#                 small personal PC remote.
+# Complications: Python, LevelDB, Node.js, Electron,
+#                native bindings, SSTables, Snappy,
+#                and a 9-headed piece of shit.
+# Last words: "идем с боем на бд" (The war with the DB has just begun)

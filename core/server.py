@@ -1,6 +1,6 @@
 import os
 import json
-import steam
+import providers.steam as steam
 import launchers
 
 from http.server import BaseHTTPRequestHandler, HTTPServer

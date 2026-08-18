@@ -1,0 +1,25 @@
+{
+  "name": "pc-remote",
+  "version": "1.0.0",
+  "description": "A small personal remote-control server for a Windows gaming PC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UrrovenGrrunta/pc-remote.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/UrrovenGrrunta/pc-remote/issues"
+  },
+  "homepage": "https://github.com/UrrovenGrrunta/pc-remote#readme",
+  "dependencies": {
+    "@electron/asar": "^4.2.1",
+    "classic-level": "^2.0.0"
+  }
+}
