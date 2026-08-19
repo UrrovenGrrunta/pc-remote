@@ -1,4 +1,4 @@
-import server
+from core import server
 
 
 def main():

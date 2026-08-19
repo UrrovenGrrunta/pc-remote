@@ -1,0 +1,20 @@
+# hydra-old.py (formerly known as hydra.py)
+# 17/08/2026 (23:49) - 19/08/2026 (20:11)
+# 
+# Cause of death:
+# Completed its experimental purpose and became too fucked up to maintain.
+# 
+# Achievements:
+# - Reverse-engineered LevelDB SSTable structure.
+# - Successfully parsed Snappy-compressed blocks.
+# - Reconstructed LevelDB internal keys.
+# - Extracted Hydra game data directly from raw .ldb files.
+# - Proved that multiple games can be recovered across all SSTable data blocks.
+# 
+# Final validation:
+# - Local system: 3/3 games found.
+# - Independent system: 11 records found, 8 launchable games.
+# 
+# Status:
+# Deceased with honours.
+# Body preserved at providers/legacy/hydra-old.py.

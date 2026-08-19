@@ -61,4 +61,21 @@
 # Sponsorship status: Tragically nonexistent.
 # Previous status: Deceased.
 # Current status: Deceased. Communication remains possible via Ouija board.
-# Status: Paranormal development.
+# Status: Paranormal development.#               R.I.P
+#     9_headed_monster_aka_hydra.py
+# 17/08/2026 (23:50) - 17/08/2026 (23:55)
+# Cause of death: Project structure.
+#                 100500 .py files in root were deemed a war crime.
+
+
+#              UPDATE
+# 19/08/2026 (20:11)
+# Hydra SSTable reader successfully validated.
+# Description: The experimental reader successfully recovered
+#              Hydra game records directly from raw LevelDB SSTables.
+# Validation: Local system: 3/3 games.
+#             Independent system: 11 records, 8 launchable games.
+# Result: The war with the DB has been won.
+# Casualties: hydra-old.py.
+# Full incident report: events/hydra.txt
+# Status: Successful proof of concept.
