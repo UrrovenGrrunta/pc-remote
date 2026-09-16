@@ -1,5 +1,5 @@
-from core import server
-from core import game_cache
+from pc_remote.core import server
+from pc_remote.core import game_cache
 
 def main():
     game_cache.load_games_cache()

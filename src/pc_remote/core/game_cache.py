@@ -1,5 +1,5 @@
-import providers.steam as steam
-import providers.hydra as hydra
+import pc_remote.providers.steam as steam
+import pc_remote.providers.hydra as hydra
 
 
 apps_cache: list[dict] = []
