@@ -2,16 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>PC Remote</title>
     <link rel="stylesheet" href="./style.css">
-
 </head>
+
 <body>
-    <details open>
-        <summary>Steam</summary>
-        <div id="steam-games" class="game-grid"></div>
-    </details>
+    <main class="remote">
+        <header class="remote__header">
+            <p class="remote__eyebrow">PC Remote</p>
+            <h1>Games</h1>
+        </header>
+
+        <details 
+            class="game-section" 
+            name="game-provider" 
+            open
+        >
+            <summary class="game-section__header">
+                Steam Games
+            </summary>
+
+            <div
+                class="game-grid"
+                id="steam-games"
+            ></div>
+        </details>
+
+        <details 
+            class="game-section" 
+            name="game-provider"
+        >
+            <summary class="game-section__header">
+                Hydra Games
+            </summary>
+
+            <div
+                class="game-grid"
+                id="hydra-games"
+            ></div>
+        </details>
+    </main>
+
     <script src="./script.js"></script>
 </body>
 </html>

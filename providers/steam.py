@@ -32,7 +32,8 @@ def get_app_data(app_id: int) -> dict | None:
         app_data = dict(
             name = app_name, 
             id = app_id, 
-            image = app_header_image
+            image = app_header_image,
+            provider = "steam",
         )
         return app_data
     else:

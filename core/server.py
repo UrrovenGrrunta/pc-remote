@@ -1,7 +1,7 @@
 import os
 import json
-import providers.steam as steam
 
+from . import game_cache
 from . import launchers
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -73,31 +73,57 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             case "/launch/gr7":
                 launchers.launch_gr7()
+
                 self.send_response(200)
                 self.end_headers()
 
             case "/launch/osu":
                 launchers.launch_osu()
+
                 self.send_response(200)
                 self.end_headers()
 
             case "/launch/ubuntu":
                 launchers.launch_ubuntu()
+
                 self.send_response(200)
                 self.end_headers()
 
             case "/apps":
-                apps = steam.get_apps(steam.get_installed_apps())
-
                 self.send_response(200)
-                self.send_header("Content-type", "application/json")
+                self.send_header(
+                    "Content-type",
+                    "application/json",
+                )
                 self.end_headers()
 
-                self.wfile.write(json.dumps(apps).encode("utf-8"))
+                self.wfile.write(
+                    json.dumps(
+                        game_cache.apps_cache
+                    ).encode("utf-8")
+                )
 
-            case path if path.startswith("/launch/"):
-                app_id = int(path.removeprefix("/launch/"))
-                launchers.launch_app(app_id)
+            case path if path.startswith("/launch/steam/"):
+                app_id = int(
+                    path.removeprefix("/launch/steam/")
+                )
+
+                launchers.launch_steam_app(app_id)
+
+                self.send_response(200)
+                self.end_headers()
+
+            case path if path.startswith("/launch/hydra/"):
+                app_id = path.removeprefix(
+                    "/launch/hydra/"
+                )
+
+                for game in game_cache.hydra_games_cache:
+                    if game["objectId"] == app_id:
+                        launchers.launch_hydra_app(
+                            game["executablePath"]
+                        )
+                        break
 
                 self.send_response(200)
                 self.end_headers()

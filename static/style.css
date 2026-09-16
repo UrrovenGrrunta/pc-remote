@@ -12,7 +12,12 @@ body {
 
     color: #f2f2f2;
     background:
-        radial-gradient(circle at top, #20252d 0, #12151a 35%, #0d0f12 70%);
+        radial-gradient(
+            circle at top,
+            #20252d 0,
+            #12151a 35%,
+            #0d0f12 70%
+        );
 
     font-family:
         -apple-system,
@@ -53,6 +58,73 @@ button {
     font-weight: 700;
     letter-spacing: -1px;
 }
+
+
+/* Game provider sections */
+
+.game-section {
+    margin-bottom: 16px;
+
+    background: #15191f;
+
+    border: 1px solid #292e36;
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+.game-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.game-section__header::-webkit-details-marker {
+    display: none;
+}
+
+.game-section__header::marker {
+    content: "";
+}
+
+.game-section__header::after {
+    content: "›";
+
+    color: #8d949e;
+
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+
+    transform: rotate(90deg);
+
+    transition: transform 180ms ease;
+}
+
+.game-section[open] .game-section__header::after {
+    transform: rotate(-90deg);
+}
+
+.game-section[open] .game-section__header {
+    border-bottom: 1px solid #292e36;
+}
+
+.game-section .game-grid {
+    padding: 14px;
+}
+
+
+/* Game cards */
 
 .game-grid {
     display: grid;
@@ -121,6 +193,9 @@ button {
     border-color: #4c5664;
 }
 
+
+/* Desktop hover */
+
 @media (hover: hover) {
     .game-card:hover {
         transform: translateY(-2px);
@@ -128,7 +203,14 @@ button {
         background: #20252c;
         border-color: #3b424d;
     }
+
+    .game-section__header:hover {
+        background: #1b2027;
+    }
 }
+
+
+/* Tablet */
 
 @media (min-width: 700px) {
     .remote {
@@ -140,10 +222,17 @@ button {
         gap: 18px;
     }
 
+    .game-section .game-grid {
+        padding: 18px;
+    }
+
     .game-card span {
         font-size: 15px;
     }
 }
+
+
+/* Desktop */
 
 @media (min-width: 1000px) {
     .game-grid {

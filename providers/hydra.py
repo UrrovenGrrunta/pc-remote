@@ -221,3 +221,22 @@ def get_hydra_games(
                 games.append(game)
 
     return games
+
+def get_apps(
+    games: list[dict] | None = None,
+) -> list[dict]:
+    if games is None:
+        games = get_hydra_games()
+
+    apps = []
+
+    for game in games:
+        app = dict(
+            name=game["title"],
+            id=game["objectId"],
+            image=game["libraryHeroImageUrl"],
+            provider="hydra",
+        )
+        apps.append(app)
+
+    return apps

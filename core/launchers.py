@@ -30,5 +30,9 @@ def launch_ubuntu():
     )
 
 
-def launch_app(app_id: int):
+def launch_steam_app(app_id: int):
     os.startfile(f"steam://rungameid/{app_id}")
+
+
+def launch_hydra_app(executable_path: str):
+    os.startfile(executable_path)

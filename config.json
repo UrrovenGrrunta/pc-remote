@@ -1,0 +1,12 @@
+{
+    "standalone": [
+        {
+            "id": "osu",
+            "name": "osu!",
+            "path": "D:/OSUSTBL/osu!.exe",
+            "launch_before": [
+                "C:/Users/timbr/Desktop/OTD/OpenTabletDriver.UX.Wpf.exe"
+            ]
+        }
+    ]
+}
