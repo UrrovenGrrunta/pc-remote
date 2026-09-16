@@ -3,6 +3,7 @@ import json
 
 from . import game_cache
 from . import launchers
+from pc_remote.paths import STATIC_DIR
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
@@ -15,7 +16,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
 
                 with open(
-                    "static/index.html",
+                    STATIC_DIR / "index.html",
                     "r",
                     encoding="utf-8",
                 ) as file:
@@ -31,7 +32,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
 
                 with open(
-                    "static/script.js",
+                    STATIC_DIR / "script.js",
                     "r",
                     encoding="utf-8",
                 ) as file:
@@ -44,7 +45,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
 
                 with open(
-                    "static/style.css",
+                    STATIC_DIR / "style.css",
                     "r",
                     encoding="utf-8",
                 ) as file:
@@ -53,11 +54,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             case path if path.startswith("/images/"):
                 image_name = path.removeprefix("/images/")
-                image_path = os.path.join(
-                    "static",
-                    "images",
-                    image_name,
-                )
+                image_path = STATIC_DIR / "images" / image_name
 
                 if not os.path.isfile(image_path):
                     self.send_response(404)

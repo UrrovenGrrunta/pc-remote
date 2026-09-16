@@ -1,9 +1,7 @@
 import json
 
-from pathlib import Path
+from pc_remote.paths import CONFIG_PATH
 from pc_remote.providers import standalone
-
-CONFIG_PATH = Path("config.json")
 
 
 def create_config():

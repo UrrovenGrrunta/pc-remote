@@ -3,3 +3,5 @@
 node_modules/
 .hydra-source/
 start-script.bat
+__pycache__/
+*.py[cod]

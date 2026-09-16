@@ -1,10 +1,7 @@
 import json
 
 from random import choice
-from pathlib import Path
-
-
-CONFIG_PATH = Path(__file__).parent.parent / "config.json"
+from pc_remote.paths import CONFIG_PATH
 
 
 def get_preset_image(app: dict | None = None) -> str:

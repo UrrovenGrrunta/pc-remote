@@ -7,7 +7,10 @@ authors = [
     { name = "UrrovenGrrunta", email = "timbro2312@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "requests>=2.32",
+    "python-snappy>=0.7",
+]
 
 [project.scripts]
 pc-remote = "pc_remote:main"

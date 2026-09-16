@@ -1,8 +1,6 @@
 import json 
 
-from pathlib import Path
-
-CONFIG_PATH = Path(__file__).parent.parent / "config.json"
+from pc_remote.paths import CONFIG_PATH
 
 def make_slug(name: str) -> str:
     slug = ""

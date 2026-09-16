@@ -19,7 +19,7 @@ PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-
 
 ## Tech stack
 
-- Python 3.12
+- Python 3.12 and `uv`
 - `http.server` from the Python standard library
 - HTML
 - CSS
@@ -32,14 +32,19 @@ PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-
 ```text
 pc-remote/
 ├── main.py
-├── core/
-│   ├── config.py
-│   ├── launchers.py
-│   └── server.py
-├── providers/
-│   ├── steam.py
-│   ├── hydra.py
-│   └── hydra_reader.js
+├── pyproject.toml
+├── src/pc_remote/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── paths.py
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── launchers.py
+│   │   └── server.py
+│   └── providers/
+│       ├── steam.py
+│       ├── hydra.py
+│       └── hydra_reader.js
 ├── documents/
 │   ├── UGPEP.md
 │   └── UGPEP_RU.md
@@ -56,13 +61,13 @@ pc-remote/
 
 ## Modules
 
-- `main.py` — application entry point.
-- `core/server.py` — HTTP routes, static file serving, and request handling.
-- `core/launchers.py` — launches Steam games and local Windows applications.
-- `core/config.py` — reserved for project configuration work.
-- `providers/steam.py` — discovers installed Steam AppIDs from manifest filenames and retrieves game metadata from the Steam Store API.
-- `providers/hydra.py` — experimental Hydra database/SSTable investigation.
-- `providers/hydra_reader.js` — experimental Node.js LevelDB reader used during Hydra research.
+- `pc_remote:main` — application entry point used by the `pc-remote` command.
+- `src/pc_remote/core/server.py` — HTTP routes, static file serving, and request handling.
+- `src/pc_remote/core/launchers.py` — launches Steam games and local Windows applications.
+- `src/pc_remote/core/config.py` — local application configuration.
+- `src/pc_remote/providers/steam.py` — discovers installed Steam AppIDs and retrieves game metadata.
+- `src/pc_remote/providers/hydra.py` — experimental Hydra database/SSTable investigation.
+- `src/pc_remote/providers/hydra_reader.js` — experimental Node.js LevelDB reader used during Hydra research.
 
 ## Documentation
 
@@ -101,10 +106,11 @@ This code is research-stage and should not yet be treated as production function
 
 The project is currently configured for a specific Windows PC. Local executable paths, the Steam directory, and the Tailscale host address must be adjusted for another machine.
 
-Start the server with:
+Install dependencies and start the server with:
 
 ```powershell
-python main.py
+uv sync
+uv run pc-remote
 ```
 
 Then open the configured Tailscale IP and port from another device connected to the same tailnet.
