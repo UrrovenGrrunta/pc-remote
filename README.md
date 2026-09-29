@@ -1,5 +1,7 @@
 # PC Remote
 
+**Project status: Active**
+
 A small personal remote-control server for a Windows gaming PC.
 
 PC Remote runs a lightweight Python HTTP server on Windows and exposes a mobile-friendly web interface over Tailscale. From a phone browser, the interface can launch installed Steam games and other local applications on the PC.
